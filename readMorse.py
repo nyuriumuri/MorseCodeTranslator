@@ -3,38 +3,42 @@ import re
 import librosa
 import os
 import numpy as np
-from sys import platform
+import argparse 
 
 unit = 0.1
 
 
-def get_file_relative_path():
-    global file_path
-    print("Please make sure that the file to be translated is in .wav format, and is located in WAV Files Input directory")
-    file_name = input("Please enter file name:")
-    file_path = 'WAV Files Input/' + file_name + '.wav'
 
+parser = argparse.ArgumentParser(description="Translates audio WAV File Morse signal to English alphabet")
+parser.add_argument('filepath', type = str, help= "Path of the WAV file")
+parser.add_argument('-u','--unit', type=float, help = 'dit duration in seconds')
+args = parser.parse_args()
+if args.unit:
+    unit = args.unit
+file_path = args.filepath
 
-while platform == 'darwin' or platform == 'linux' or platform == 'linux2':
-    get_file_relative_path()
-    if os.path.exists(file_path):
-        data, rate = librosa.load(file_path, mono=True)
-        interval = int(rate * unit)
-        ranges = (np.arange(0, len(data), step=interval))
-        fourier = [np.fft.fft(data[i:i + interval]) for i in ranges]
-        max_f = [max(np.absolute(i)) for i in fourier]
-        code = [1 if i > 50 else 0 for i in max_f]
-        string = "".join([str(i) for i in code])
+if not file_path.endswith('.wav'):
+    raise Exception("Input must be a WAV file")
+if not os.path.isfile(file_path):
+    raise Exception("File "+file_path+" does not exist")
 
-        dash = re.compile('1110')
-        dot = re.compile('10')
-        word = re.compile('0000000')
-        letter = re.compile('000')
+data, rate = librosa.load(file_path, mono=True)
+interval = int(rate * unit)
+ranges = (np.arange(0, len(data), step=interval))
+fourier = [np.fft.fft(data[i:i + interval]) for i in ranges]
+max_f = [max(np.absolute(i)) for i in fourier]
+code = [1 if i > 50 else 0 for i in max_f]
+string = "".join([str(i) for i in code])
 
-        string = dash.sub('-', string)
-        string = dot.sub('.', string)
-        string = word.sub('/', string)
-        string = letter.sub(' ', string)
+dash = re.compile('1110')
+dot = re.compile('10')
+word = re.compile('0000000')
+letter = re.compile('000')
 
-        print(string)
-        print(code)
+string = dash.sub('-', string)
+string = dot.sub('.', string)
+string = word.sub('/', string)
+string = letter.sub(' ', string)
+string = re.sub("[0-9]","",string)
+print(string)
+print(code)

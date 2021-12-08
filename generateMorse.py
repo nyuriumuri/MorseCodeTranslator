@@ -1,5 +1,6 @@
-import time
 
+import argparse
+from typing_extensions import ParamSpec
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.io.wavfile import write
@@ -71,7 +72,10 @@ def char_to_wave(c):
     return out
 
 
-sentence = input('Input a sentence: ')
+parser = argparse.ArgumentParser(description='Converts the input sentence to a Morse WAV file')
+parser.add_argument('sentence', type=str)
+args = parser.parse_args()
+sentence = args.sentence
 sentence = sentence.upper()
 morse = ""
 
@@ -87,10 +91,8 @@ for c in morse:
 plt.plot(data)
 plt.show()
 
-ts = time.gmtime()
-# print(time.strftime("%Y-%m-%d/%H:%M:%S", ts))
-# n = len(os.listdir("WAV Files Input"))
 
-output_file_name = "WAV Files Output/output_" + time.strftime("%Y-%m-%d/%H:%M:%S", ts) + ".wav"
+
+output_file_name = "wav/"+sentence +".wav"
 
 write(output_file_name, fs, data)
