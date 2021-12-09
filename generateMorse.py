@@ -1,58 +1,22 @@
 import argparse
-from typing_extensions import ParamSpec
+
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.io.wavfile import write
 
+import alpha_morse
+
+
+def check_substring(string, sub_str):
+    if string.find(sub_str) == -1:
+        return False
+    else:
+        return True
+
+
 f = 400
 fs = 22050
 unit = 0.1
-
-MORSE_CODE_DICT = {'A': '.-',
-                   'B': '-...',
-                   'C': '-.-.',
-                   'D': '-..',
-                   'E': '.',
-                   'F': '..-.',
-                   'G': '--.',
-                   'H': '....',
-                   'I': '..',
-                   'J': '.---',
-                   'K': '-.-',
-                   'L': '.-..',
-                   'M': '--',
-                   'N': '-.',
-                   'O': '---',
-                   'P': '.--.',
-                   'Q': '--.-',
-                   'R': '.-.',
-                   'S': '...',
-                   'T': '-',
-                   'U': '..-',
-                   'V': '...-',
-                   'W': '.--',
-                   'X': '-..-',
-                   'Y': '-.--',
-                   'Z': '--..',
-                   '1': '.----',
-                   '2': '..---',
-                   '3': '...--',
-                   '4': '....-',
-                   '5': '.....',
-                   '6': '-....',
-                   '7': '--...',
-                   '8': '---..',
-                   '9': '----.',
-                   '0': '-----',
-                   ', ': '--..--',
-                   '.': '.-.-.-',
-                   '?': '..--..',
-                   '/': '-..-.',
-                   '-': '-....-',
-                   '(': '-.--.',
-                   ')': '-.--.-',
-                   ' ': '/'
-                   }
 
 
 def char_to_wave(c):
@@ -75,11 +39,15 @@ parser = argparse.ArgumentParser(description='Converts the input sentence to a M
 parser.add_argument('sentence', type=str)
 args = parser.parse_args()
 sentence = args.sentence
+# print(type(sentence))
+if check_substring(sentence, ", "):
+    sentence = sentence.replace(", ", ",")
+
 sentence = sentence.upper()
 morse = ""
 
 for c in sentence:
-    morse += MORSE_CODE_DICT[c]
+    morse += alpha_morse.MORSE_CODE_DICT[c]
     if c != ' ':
         morse += ' '
 data = np.array([])

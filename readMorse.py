@@ -4,8 +4,7 @@ import librosa
 import os
 import numpy as np
 import argparse
-
-
+import alpha_morse
 # from generateMorse import MORSE_CODE_DICT
 
 def list_to_string(s):
@@ -18,54 +17,6 @@ def list_to_string(s):
 
         # return string
     return str1
-
-
-MORSE_CODE_DICT = {'A': '.-',
-                   'B': '-...',
-                   'C': '-.-.',
-                   'D': '-..',
-                   'E': '.',
-                   'F': '..-.',
-                   'G': '--.',
-                   'H': '....',
-                   'I': '..',
-                   'J': '.---',
-                   'K': '-.-',
-                   'L': '.-..',
-                   'M': '--',
-                   'N': '-.',
-                   'O': '---',
-                   'P': '.--.',
-                   'Q': '--.-',
-                   'R': '.-.',
-                   'S': '...',
-                   'T': '-',
-                   'U': '..-',
-                   'V': '...-',
-                   'W': '.--',
-                   'X': '-..-',
-                   'Y': '-.--',
-                   'Z': '--..',
-                   '1': '.----',
-                   '2': '..---',
-                   '3': '...--',
-                   '4': '....-',
-                   '5': '.....',
-                   '6': '-....',
-                   '7': '--...',
-                   '8': '---..',
-                   '9': '----.',
-                   '0': '-----',
-                   ', ': '--..--',
-                   '.': '.-.-.-',
-                   '?': '..--..',
-                   '/': '-..-.',
-                   '-': '-....-',
-                   '(': '-.--.',
-                   ')': '-.--.-',
-                   ' ': '/',
-                   '': ''
-                   }
 
 unit = 0.1
 
@@ -106,8 +57,8 @@ print(string)
 # string.replace("/", " ")
 
 list_of_words = string.split("/")
-key_list = list(MORSE_CODE_DICT.keys())
-val_list = list(MORSE_CODE_DICT.values())
+key_list = list(alpha_morse.MORSE_CODE_DICT.keys())
+val_list = list(alpha_morse.MORSE_CODE_DICT.values())
 
 sentence = []
 
