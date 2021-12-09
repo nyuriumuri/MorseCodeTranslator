@@ -5,6 +5,8 @@ import os
 import numpy as np
 import argparse
 import alpha_morse
+
+
 # from generateMorse import MORSE_CODE_DICT
 
 def list_to_string(s):
@@ -17,6 +19,7 @@ def list_to_string(s):
 
         # return string
     return str1
+
 
 unit = 0.1
 
