@@ -12,6 +12,7 @@
     - [Usage Documentation](#usage-documentation)
       - [To convert a sentence to Morse](#to-convert-a-sentence-to-morse)
       - [To convert a Morse WAV file to English](#to-convert-a-morse-wav-file-to-english)
+    - [Conclusions](#conclusions)
     - [References](#references)
 
 ## Morse Code Translator
@@ -38,7 +39,7 @@ International Morse Code is the standard most widely used, which is composed of 
 
 ### Problem Specification
 
-The solution we aimed to provide is for the lack of availability of reliability of morse code translators, that's why we decided to provide a program that is capable of generating morse code wav files from inserted texts and vice versa.
+In this project our aim is to translate English strings into morse code wav files, and also translating morse code wav files to English sentences.
 
 ### Data
 
@@ -129,6 +130,10 @@ For example:
 >>--. --- --- -../ -- --- .-. -. .. -. --. -.-.--
 >>GOOD MORNING!
 >>```
+
+### Conclusions
+
+The conclusions made after implementing this project is that the power of using frequency spectrum analysis can be a very valuable asset in any domain. It also gave us insights on how some streams of data can sound extremely not useful, however, with the right decryption techniques can hold tremendous amounts of important information.
 
 ### References
 
