@@ -58,6 +58,8 @@ for c in morse:
 plt.plot(data)
 plt.show()
 
+sentence = sentence.title()
+
 output_file_name = "wav/" + sentence + ".wav"
 
 write(output_file_name, fs, data)
