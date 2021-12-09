@@ -40,8 +40,8 @@ parser.add_argument('sentence', type=str)
 args = parser.parse_args()
 sentence = args.sentence
 # print(type(sentence))
-if check_substring(sentence, ", "):
-    sentence = sentence.replace(", ", ",")
+# if check_substring(sentence, ", "):
+#     sentence = sentence.replace(", ", ",")
 
 sentence = sentence.upper()
 morse = ""
@@ -51,7 +51,7 @@ for c in sentence:
     if c != ' ':
         morse += ' '
 data = np.array([])
-
+print(morse);
 for c in morse:
     data = np.concatenate((data, char_to_wave(c)), axis=0)
 

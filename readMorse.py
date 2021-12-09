@@ -74,6 +74,6 @@ sentence.pop(-1)
 sentence = list_to_string(sentence)
 
 print(sentence)
-print(list_of_words)
+# print(list_of_words)
 
 # print(code)
