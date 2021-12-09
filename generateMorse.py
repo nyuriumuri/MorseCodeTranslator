@@ -1,4 +1,3 @@
-
 import argparse
 from typing_extensions import ParamSpec
 import matplotlib.pyplot as plt
@@ -91,8 +90,6 @@ for c in morse:
 plt.plot(data)
 plt.show()
 
-
-
-output_file_name = "wav/"+sentence +".wav"
+output_file_name = "wav/" + sentence + ".wav"
 
 write(output_file_name, fs, data)
